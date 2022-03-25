@@ -6,7 +6,7 @@ st.title('Uber pickups in NYC')
 DATE_COLUMN = 'date/time'
 DATA_URL = ('https://data.lacity.org/api/views/2nrs-mtv8/rows.csv?accessType=DOWNLOAD')
 @st.cache
-def load_data:
+def load_data():
     data = pd.read_csv(DATA_URL, error_bad_lines=False)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
