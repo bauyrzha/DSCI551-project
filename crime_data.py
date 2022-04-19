@@ -44,7 +44,7 @@ try:
         # use count() and sort()
         data1 = data.groupby(['zipcode'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
         # in context of zipcode            
-        st.subheader('Number of crimes by zipcodes')        
+        st.subheader('Number of crimes in context of zipcodes')        
         fig = plt.figure(figsize=(9, 6))
         plt.bar(data1['zipcode'], data1['Count'])
         plt.xlabel("ZipCode")
@@ -62,7 +62,20 @@ try:
         data2 = data.groupby(['crm cd desc'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
         if st.checkbox('Show top 10 crimes'):
             st.subheader('Top 10 crimes')
-            st.write(data2.head(10))  
+            st.write(data2.head(10))
+        if st.checkbox('Show number of crimes in context of victim sex'):
+            # victim sex
+            data3 = data[data['vict sex'] != 'H']
+            data3 = data3.groupby(['vict sex'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+            # in context of victim sex            
+            st.subheader('Number of crimes by victim sex')        
+            fig = plt.figure(figsize=(9, 6))
+            plt.bar(data3['vict sex'], data3['Count'])
+            plt.xlabel("victim sex")
+            plt.ylabel("Number of Crimes")
+            Gender=['M - Male F - Female X - Unknown']
+            plt.legend(Gender,loc=1) 
+            st.pyplot(fig)
     elif  int(number) in listo:
         data=data[data['zipcode'] == int(number)]
         if st.checkbox('Show raw data'):
@@ -78,10 +91,23 @@ try:
         st.map(filtered_data)
         # top 10 crimes    
         # use count() and sort()
-        data = data.groupby(['crm cd desc'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+        data2 = data.groupby(['crm cd desc'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
         if st.checkbox('Show top 10 crimes'):
             st.subheader('Top 10 crimes')
-            st.write(data.head(10))
+            st.write(data2.head(10))
+        if st.checkbox('Show number of crimes in context of victim sex'):
+            # victim sex
+            data3 = data[data['vict sex'] != 'H']
+            data3 = data3.groupby(['vict sex'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+            # in context of victim sex            
+            st.subheader('Number of crimes by victim sex')        
+            fig = plt.figure(figsize=(9, 6))
+            plt.bar(data3['vict sex'], data3['Count'])
+            plt.xlabel("victim sex")
+            plt.ylabel("Number of Crimes")
+            Gender=['M - Male F - Female X - Unknown']
+            plt.legend(Gender,loc=1) 
+            st.pyplot(fig)
     else:
         st.write('Inserted number of ZipCode is not found')
 except:
