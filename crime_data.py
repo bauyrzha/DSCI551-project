@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 st.title('Crime in LA')
 
 DATE_COLUMN = 'date/time'
@@ -39,10 +40,29 @@ try:
         hist_values = np.histogram(
             data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
         st.bar_chart(hist_values)
+        # top 10 crimest zipcodes    
+        # use count() and sort()
+        data1 = data.groupby(['zipcode'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+        # in context of zipcode            
+        st.subheader('Number of crimes by zipcodes')        
+        fig = plt.figure(figsize=(9, 6))
+        plt.bar(data1['zipcode'], data1['Count'])
+        plt.xlabel("ZipCode")
+        plt.ylabel("Number of Crimes")
+        st.pyplot(fig)
         hour_to_filter = st.slider('hour', 0, 23, 20)  # min: 0h, max: 23h, default: 20h
         filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
         st.subheader(f'Map of all crimes at %s:00' % hour_to_filter)
         st.map(filtered_data)
+        if st.checkbox('Show top 10 crimest zipcodes'):
+            st.subheader('Top 10 crimest zipcodes')
+            st.write(data1.head(10))
+        # top 10 crimes    
+        # use count() and sort()
+        data2 = data.groupby(['crm cd desc'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+        if st.checkbox('Show top 10 crimes'):
+            st.subheader('Top 10 crimes')
+            st.write(data2.head(10))  
     elif  int(number) in listo:
         data=data[data['zipcode'] == int(number)]
         if st.checkbox('Show raw data'):
@@ -56,6 +76,12 @@ try:
         filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
         st.subheader(f'Map of all crimes at %s:00' % hour_to_filter)
         st.map(filtered_data)
+        # top 10 crimes    
+        # use count() and sort()
+        data = data.groupby(['crm cd desc'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
+        if st.checkbox('Show top 10 crimes'):
+            st.subheader('Top 10 crimes')
+            st.write(data.head(10))
     else:
         st.write('Inserted number of ZipCode is not found')
 except:
