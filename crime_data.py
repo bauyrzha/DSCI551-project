@@ -26,14 +26,25 @@ data_load_state.text("Done! (using st.cache)")
 #     ('ALL', data['zipcode']))
 
 #'You selected: ', option
-number = st.text_input('Insert a number of ZipCode')
-st.write('The current number is ', number)
+number = st.text_input('Insert a number of ZipCode or type "ALL" to see all crimes in LA county')
+#st.write('The current number is ', number)
 try:
     listo = data['zipcode'].to_list()
-    if  int(number) in listo:
+    if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"':
+        data = load_data()
+        if st.checkbox('Show raw data'):
+            st.subheader('Raw data')
+            st.write(data)
+        st.subheader('Number of crimes by hour')
+        hist_values = np.histogram(
+            data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
+        st.bar_chart(hist_values)
+        hour_to_filter = st.slider('hour', 0, 23, 20)  # min: 0h, max: 23h, default: 20h
+        filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
+        st.subheader(f'Map of all crimes at %s:00' % hour_to_filter)
+        st.map(filtered_data)
+    elif  int(number) in listo:
         data=data[data['zipcode'] == int(number)]
-        if st.checkbox('Show crimes for all zipcodes'):
-            data = load_data()
         if st.checkbox('Show raw data'):
             st.subheader('Raw data')
             st.write(data)
