@@ -120,7 +120,7 @@ def crime():
     number = st.text_input('Insert a number of ZipCode or type "ALL" to see all crimes in LA county')
     try:
         listo = data['zipcode'].to_list()
-        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"':
+        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all" or number ==""':
             checkbox(data)
             hist(data)
             zip_plot(data)
