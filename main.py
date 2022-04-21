@@ -117,10 +117,10 @@ def crime():
     data = load_data()
     # Notify the reader that the data was successfully loaded.
     data_load_state.text("Done! (using cache)")
-    number = st.text_input('Insert a number of ZipCode or type "ALL" to see all crimes in LA county')
+    number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
     try:
         listo = data['zipcode'].to_list()
-        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all" or number ==" "':
+        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all" or st.checkbox('ALL')':
             checkbox(data)
             hist(data)
             zip_plot(data)
