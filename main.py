@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from google.cloud import firestore
+from PIL import Image
 
 #Setting up our homepage window of Streamlit app
 def main():
@@ -36,6 +37,8 @@ def homepage():
         #### ***Topic:*** This project will examine inequalities in regions of Los Angeles based on crime rates, access to food, and access to quality education. 
         ###### The app are made by _**Yerkebulan B., Soumeya K., Zihao H.**_
         #""")
+    image = Image.open('homepage.jpg')
+    st.image(image, caption='Original Map of Los Angeles Country')
 
 def crime():
     st.title('Crime in LA')
@@ -120,7 +123,7 @@ def crime():
     number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
     try:
         listo = data['zipcode'].to_list()
-        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL', on_change):
+        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
             checkbox(data)
             hist(data)
             zip_plot(data)
