@@ -1,3 +1,4 @@
 streamlit
 google-cloud-firestore
 matplotlib
+PIL
