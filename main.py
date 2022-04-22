@@ -12,9 +12,9 @@ def main():
         "Select a Page",
         [
             "Homepage",
-            "Crime LA",
-            "Food LA",
-            "Education LA"
+            "Crime in LA",
+            "Food Banks in LA",
+            "Education in LA"
         ]
     )
     
@@ -22,13 +22,13 @@ def main():
     if page == "Homepage":
         homepage()
     #Crime LA Page
-    if page == "Crime LA":
+    if page == "Crime in LA":
         crime()
     #Food LA Page
-    if page == "Food LA":
+    if page == "Food Banks in LA":
         food()
     #Education LA Page
-    if page == "Education LA":
+    if page == "Education in LA":
         education()
 
 def homepage():
