@@ -35,7 +35,7 @@ def homepage():
     st.write("""
         # Social Inequality Across LA County
         #### ***Topic:*** This project will examine inequalities in regions of Los Angeles based on crime rates, access to food, and access to quality education. 
-        ###### The app are made by _**Yerkebulan B., Soumeya K., Zihao H.**_
+        ###### The app is made by _**Yerkebulan B., Soumeya K., Zihao H.**_
         #""")
     image = Image.open('homepage.jpg')
     st.image(image, caption='Original Map of Los Angeles Country')
