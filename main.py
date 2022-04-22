@@ -155,7 +155,7 @@ def food():
         data = pd.read_json(FOOD_URL, orient='records')
         lowercase = lambda x: str(x).lower()
         data.rename(lowercase, axis='columns', inplace=True)
-        data.rename(columns={'Zip Code': 'zipcode'}, inplace=True)
+        data.rename(columns={'zip code': 'zipcode'}, inplace=True)
         return data
     
     def checkbox(data):
