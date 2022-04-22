@@ -177,10 +177,12 @@ def food():
         listo = data['zipcode'].to_list()
         if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
             maps(data)
+            checkbox(data)
 
         elif int(number) in listo:
             data=data[data['zipcode'] == int(number)]
             maps(data)
+            checkbox(data)
 
         else:
             st.write('Inserted number of ZipCode is not found')
