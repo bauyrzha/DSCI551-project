@@ -145,9 +145,47 @@ def crime():
             st.write('Inserted number of ZipCode is not found')
     except:
         st.write('Enter please 5 main digits of ZipCode')
-
+    
 def food():
-    st.write('Soumeya, write your code under def food() in main.py')
+    st.title('Food Banks in Los Angeles County')
+    FOOD_URL = 'https://dsci551-project-15614-default-rtdb.firebaseio.com/food.json'
+    @st.cache
+    
+    def load_data():
+        data = pd.read_json(FOOD_URL, orient='records')
+        lowercase = lambda x: str(x).lower()
+        data.rename(lowercase, axis='columns', inplace=True)
+        data.rename(columns={'Zip Code': 'zipcode'}, inplace=True)
+        return data
+    
+    def checkbox(data):
+        if st.checkbox('Show raw data'):
+            st.subheader('Raw data')
+            st.write(data)
+            
+    def maps(data):
+        st.map(data)
+            
+    data_load_state = st.text('Loading data...')
+    # Load all rows of data into the dataframe.
+    data = load_data()
+    # Notify the reader that the data was successfully loaded.
+    data_load_state.text("Done! (using cache)")
+    number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
+    
+    try:
+        listo = data['zipcode'].to_list()
+        if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
+            maps(data)
+
+        elif int(number) in listo:
+            data=data[data['zipcode'] == int(number)]
+            maps(data)
+
+        else:
+            st.write('Inserted number of ZipCode is not found')
+    except:
+        st.write('Enter please 5 main digits of ZipCode')
     
 def education():
     st.write('Zihao, write your code under def education() in main.py')
