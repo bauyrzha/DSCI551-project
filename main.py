@@ -43,8 +43,7 @@ def homepage():
 def crime():
     st.title('Crime in LA')
     DATE_COLUMN = 'date/time'
-    #DATA_URL = ('https://data.lacity.org/api/views/2nrs-mtv8/rows.csv?accessType=DOWNLOAD')
-    DATA_URL = 'df_crime_modify.csv.gz'
+    DATA_URL = 'df_crime.csv.gz'
     @st.cache
     def load_data():
         data = pd.read_csv(DATA_URL)
