@@ -207,25 +207,31 @@ def food():
         listo = data['zipcode'].to_list()
         if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
             checkbox(data, data2)
-            st.subheader(f'Map of all foodbanks')
+            st.subheader(f'Map of food banks')
             maps(data)
-            st.subheader(f'Map of all grocery stores')
+            st.subheader(f'Map of grocery stores')
             maps(data2)
 
         elif int(number) in listo:
             data=data[data['zipcode'] == int(number)]
             data2=data2[data2['zipcode'] == int(number)]
             checkbox(data, data2)
-            st.subheader(f'Map of all foodbanks')
+            st.subheader(f'Map of food banks')
             maps(data)
-            st.subheader(f'Map of all grocery stores')
+            st.subheader(f'Map of grocery stores')
             maps(data2)
 
         else:
             st.write('Inserted number of ZipCode is not found')
     except:
         st.write('Enter please 5 main digits of ZipCode')
-    
+        
+    try:
+        image = Image.open('food.jpg')
+        st.image(image)
+    except:
+        st.write('')    
+        
 def education():
     st.title('Education Opportunity')
     st.header('Schools')
