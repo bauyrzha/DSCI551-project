@@ -1,8 +1,9 @@
 # DSCI551-project - Final project description
 # 1. About the project 
-the group project created by Yerke Bauyrzhanov, Soumeya Kerrar, Zihao Han 
+The group project created by Yerke Bauyrzhanov, Soumeya Kerrar, Zihao Han 
 
 **The streamlit link:**
+
 https://share.streamlit.io/bauyrzha/dsci551-project/main/main.py
 
 **Project title:** Social Inequality Across Los Angeles County
@@ -30,11 +31,13 @@ to see which areas are most negatively impacted, and also filter by categories o
 
 # 2.Crime Rates
 **Source:**
+
 ● LA City Crime Data: https://data.lacity.org/browse?q=crime%20data&sortBy=relevance
 
 **Description:** This dataset reflects incidents of crime in the City of Los Angeles dating back to 2020. This data is transcribed from original crime reports that are typed on paper and therefore there may be some inaccuracies within the data. Some location fields with missing data are noted as (0°, 0°). Address fields are only provided to the nearest hundred block in order to maintain privacy. This data is as accurate as the data in the database. 
 
 **Features to include:**
+
 - Number of crimes by hour
 - Number of crimes in context of zipcodes
 - Locations of highest crime rates
@@ -43,17 +46,20 @@ to see which areas are most negatively impacted, and also filter by categories o
 - Victim Sex
 
 Step 1 (data extracting and data cleaning):
+
 1) download dataset and clean/remove unnecessary/irrelevant data.
   run jupyter notebook **crime_cleaning.ipynb**
 2) get zipcodes for locations of crimes. Need to use google colab.
   run jupyter notebook **get_zip_google_colab.ipynb** on google colab.
   
 Step 2 (show data):
+
 1) create python code using stremlit library to create stremlit application.
 2) create requirements.txt with the list of necessary libraries.
    run command line **streamlit run main.py** for local machine
 
 Step 3 (data analysis):
+
 1) According to the histogram, we can notice that the pick of crime rates is at 12:00 pm. However, we guess that it is a default time when time of crime is unknown.
 Therefore, we consider the majority number of crimes takes place in evening time with the peak at 6 pm.
 2) According to the plot, many crimes take place in range of zipcodes 90000-90080.
