@@ -214,6 +214,7 @@ def food():
 
         elif int(number) in listo:
             data=data[data['zipcode'] == int(number)]
+            data2=data2[data2['zipcode'] == int(number)]
             checkbox(data, data2)
             st.subheader(f'Map of all foodbanks')
             maps(data)
