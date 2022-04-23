@@ -427,7 +427,109 @@ def education():
        st.bar_chart(sch_grade_count)
        st.map(zipcode_df)
 
+def equity():
+    st.header('Crime,Food,School Map')
 
+    if not firebase_admin._apps:
+          cred = credentials.Certificate("./ServiceAccountKey.json")
+          app = firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    docs = db.collection(u'foodbanks_LA').stream()
+    FOOD_DF = pd.DataFrame()
+    for doc in docs:
+          FOOD_DF = FOOD_DF.append(doc.to_dict(), ignore_index=True) 
+    docs2 = db.collection(u'grocery_LA').stream()
+    Grocery_DF = pd.DataFrame()
+    for doc in docs2:
+          Grocery_DF = Grocery_DF.append(doc.to_dict(), ignore_index=True)
+
+    def load_data1():
+          DATA_URL = 'df_crime_last.csv.gz'
+          DATE_COLUMN = 'date/time'
+          data = pd.read_csv(DATA_URL)
+          lowercase = lambda x: str(x).lower()
+          data.rename(lowercase, axis='columns', inplace=True)
+          data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
+          return data
+
+    def load_data2():
+          data = FOOD_DF[['Food Bank Name', 'Address', 'Zip Code', 'Latitude', 'Longitude']]
+          data[['Zip Code','Latitude', 'Longitude']] = data[['Zip Code','Latitude', 'Longitude']].apply(pd.to_numeric)
+          lowercase = lambda x: str(x).lower()
+          data.rename(lowercase, axis='columns', inplace=True)
+          data.rename(columns={'zip code': 'zipcode'}, inplace=True)
+          return data
+
+    def load_data3():
+          data = Grocery_DF[['Grocery Name','Address','zipcode','latitude','longitude']]
+          data[['zipcode','latitude','longitude']] = data[['zipcode','latitude','longitude']].apply(pd.to_numeric)
+          lowercase = lambda x: str(x).lower()
+          data.rename(lowercase, axis='columns', inplace=True)
+          return data
+
+    def load_data4():
+
+          edu_url='https://laequityeducation-default-rtdb.firebaseio.com/school.json'
+          df = pd.read_json(edu_url)
+          df = df
+          return df
+    df1=load_data1()
+    df1.rename(columns={"lon":'longitude'},inplace=True)
+    df1.rename(columns={"lat":'latitude'},inplace=True)
+    df2=load_data2()
+    df3=load_data3()
+    df4=load_data4()
+
+    loc_df4=pd.DataFrame([df4["longitude"],df4["latitude"]]).T
+    loc_df3=pd.DataFrame([df3["longitude"],df3["latitude"]]).T
+    loc_df2=pd.DataFrame([df2["longitude"],df2["latitude"]]).T
+    loc_df1=pd.DataFrame([df1["longitude"],df1["latitude"]]).T
+    st.pydeck_chart(pdk.Deck(
+       map_style='mapbox://styles/mapbox/light-v9',
+       initial_view_state=pdk.ViewState(
+           latitude=df4["latitude"].mean(),
+           longitude=df4["longitude"].mean(),
+           zoom=8.5,
+           pitch=36,
+       ),
+       layers=[
+           pdk.Layer(
+              'HexagonLayer',
+              data=loc_df4,
+              get_position='[longitude, latitude]',
+              radius=250,
+              elevation_scale=5,
+              elevation_range=[0, 1200],
+              pickable=True,
+              extruded=True,
+           ),
+           pdk.Layer(
+              "HeatmapLayer",
+              data=loc_df1,
+              opacity=0.9,
+              get_position=["longitude", "latitude"],
+           ),
+           pdk.Layer(
+               'ScatterplotLayer',
+               data=loc_df3,
+               get_position='[longitude, latitude]',
+               get_color='[100,200, 50, 160]',
+               get_radius=1300,
+           ),
+           pdk.Layer(
+               'ScatterplotLayer',
+               data=loc_df2,
+               get_position='[longitude, latitude]',
+               get_color='[50,100,200, 160]',
+               get_radius=1300,
+           ),
+       ],
+   ))
+    st.caption('Scroll to zoom in/out')
+    st.caption('Bar shows the density of the Schools')
+    st.caption('Heatmap shows the density of the Crimes')
+    st.caption('Green Spot shows Food Banks')
+    st.caption('Blue Spot shows Groceries')
     
         
 #driver code
