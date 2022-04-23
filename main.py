@@ -3,8 +3,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from google.cloud import firestore
 from PIL import Image
+import firebase_admin
+from firebase_admin import credentials, firestore
 
 #Setting up our homepage window of Streamlit app
 def main():
@@ -150,11 +151,18 @@ def crime():
     
 def food():
     st.title('Food Banks in Los Angeles County')
-    FOOD_URL = 'https://dsci551-project-15614-default-rtdb.firebaseio.com/food.json'
-    @st.cache
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("./ServiceAccountKey.json")
+        app = firebase_admin.initialize_app(cred)
+    db = firestore.client()
+    docs = db.collection(u'foodbanks_LA').stream()
+    FOOD_DF = pd.DataFrame()
+    for doc in docs:
+        FOOD_DF = FOOD_DF.append(doc.to_dict(), ignore_index=True) 
     
     def load_data():
-        data = pd.read_json(FOOD_URL, orient='records')
+        data = FOOD_DF[['Food Bank Name', 'Address', 'Zip Code', 'Latitude', 'Longitude']]
+        data[['Zip Code','Latitude', 'Longitude']] = data[['Zip Code','Latitude', 'Longitude']].apply(pd.to_numeric)
         lowercase = lambda x: str(x).lower()
         data.rename(lowercase, axis='columns', inplace=True)
         data.rename(columns={'zip code': 'zipcode'}, inplace=True)
