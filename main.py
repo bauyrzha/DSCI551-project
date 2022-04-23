@@ -17,7 +17,8 @@ def main():
             "Crime in LA",
             "Food Banks in LA",
             "Education in LA",
-            "Equity, Opportunity and Risk"
+            "Equity, Opportunity and Risk",
+            "Additional Resources"
         ]
     )
     
@@ -36,12 +37,15 @@ def main():
     #Equity and opportunity
     if page == "Equity, Opportunity and Risk":
         equity()
+    #Additional Resources
+    if page == "Additional Resources":
+        resources()
 
 def homepage():
     st.write("""
         # Social Inequality Across LA County
-        #### ***Topic:*** This project will examine inequalities in regions of Los Angeles based on crime rates, access to food, and access to quality education. 
-        ###### The app is made by _**Yerkebulan B., Soumeya K., Zihao H.**_
+        #### ***Topic:*** This project examines inequalities in regions of Los Angeles County based on crime rates, access to food, and access to quality education. 
+        ###### The app was created by _**Yerkebulan B., Soumeya K., Zihao H.**_
         #""")
     try:
         image = Image.open('homepage.jpg')
@@ -128,7 +132,7 @@ def crime():
     data = load_data()
     # Notify the reader that the data was successfully loaded.
     data_load_state.text("Done! (using cache)")
-    number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
+    number = st.text_input('Insert a ZipCode or type/check "ALL" to see all crimes in LA county')
     try:
         listo = data['zipcode'].to_list()
         if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
@@ -150,9 +154,9 @@ def crime():
             top10_rare_crime(data)
             victim_sex(data)
         else:
-            st.write('Inserted number of ZipCode is not found')
+            st.write('Inserted ZipCode is not found')
     except:
-        st.write('Enter please 5 main digits of ZipCode')
+        st.write('Please enter 5 main digits of ZipCode')
     
 def food():
     st.title('Food Banks in Los Angeles County')
@@ -201,7 +205,7 @@ def food():
     data2 = load_data2()
     # Notify the reader that the data was successfully loaded.
     data_load_state.text("Done! (using cache)")
-    number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
+    number = st.text_input('Insert a ZipCode or type/check "ALL" to see all crimes in LA county')
     
     try:
         listo = data['zipcode'].to_list()
@@ -222,9 +226,9 @@ def food():
             maps(data2)
 
         else:
-            st.write('Inserted number of ZipCode is not found')
+            st.write('Inserted ZipCode is not found')
     except:
-        st.write('Enter please 5 main digits of ZipCode')
+        st.write('Please enter 5 main digits of ZipCode')
         
     st.write('In addition to food banks and grocery stores, essential food can be obtained by applying for Cal Fresh benefits:')
     st.write('[Cal Fresh Benefits Application and Information](https://www.cdss.ca.gov/food-nutrition/calfresh)')
@@ -542,6 +546,7 @@ def equity():
     st.caption('Green Spot shows Food Banks')
     st.caption('Blue Spot shows Groceries')
     
+def resources():
         
 #driver code
 if __name__ == "__main__":
