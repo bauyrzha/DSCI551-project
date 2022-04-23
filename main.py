@@ -40,6 +40,8 @@ def homepage():
     try:
         image = Image.open('homepage.jpg')
         st.image(image, caption='Original Map of Los Angeles Country')
+    except:
+        st.write('')
 
 def crime():
     st.title('Crime in LA')
