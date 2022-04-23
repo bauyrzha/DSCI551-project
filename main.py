@@ -182,7 +182,9 @@ def food():
     def checkbox(data, data2):
         if st.checkbox('Show raw data'):
             st.subheader('Raw data')
+            st.write('Foodbank information')
             st.write(data)
+            st.write('Grocery iformation')
             st.write(data2)
             
     def maps(data):
@@ -202,12 +204,14 @@ def food():
         if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
             checkbox(data, data2)
             maps(data)
+            st.subheader(f'Map of all grocery stores')
             maps(data2)
 
         elif int(number) in listo:
             data=data[data['zipcode'] == int(number)]
             checkbox(data, data2)
             maps(data)
+            st.subheader(f'Map of all grocery stores')
             maps(data2)
 
         else:
