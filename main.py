@@ -174,6 +174,7 @@ def food():
             st.write(data)
             
     def maps(data):
+        st.subheader(f'Map of all foodbanks')
         st.map(data)
             
     data_load_state = st.text('Loading data...')
