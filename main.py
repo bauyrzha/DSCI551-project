@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import firebase_admin
 from firebase_admin import credentials, firestore
+import pydeck as pdk
 
 #Setting up our homepage window of Streamlit app
 def main():
@@ -221,7 +222,207 @@ def food():
         st.write('Enter please 5 main digits of ZipCode')
     
 def education():
-    st.write('Zihao, write your code under def education() in main.py')
+    st.title('Education Opportunity')
+    st.header('Schools')
+
+
+    #df = pd.read_json(edu_url)
+    #https://sspai.com/post/58474
+
+
+
+    def load_data():
+
+        edu_url='https://laequityeducation-default-rtdb.firebaseio.com/school.json'
+        df = pd.read_json(edu_url)
+        df = df
+        return df
+
+    df=  load_data()
+    st.write(" ")
+    st.write(f"there are {len(df)} schools in data set")
+    RawData= st.checkbox('Show Raw Data')
+    if RawData:
+       st.dataframe(df)
+
+
+    st.subheader('Education opportunity Density Map in Los Angeles County:')
+    loc_df=pd.DataFrame([df["longitude"],df["latitude"]]).T
+    st.pydeck_chart(pdk.Deck(
+         map_style='mapbox://styles/mapbox/light-v9',
+         initial_view_state=pdk.ViewState(
+             latitude=df["latitude"].mean(),
+             longitude=df["longitude"].mean(),
+             zoom=8.5,
+             pitch=33,
+         ),
+         layers=[
+             pdk.Layer(
+                'HexagonLayer',
+                data=loc_df,
+                get_position='[longitude, latitude]',
+                radius=300,
+                elevation_scale=5,
+                elevation_range=[0, 2000],
+                pickable=True,
+                extruded=True,
+             ),
+             pdk.Layer(
+                 'ScatterplotLayer',
+                 data=loc_df,
+                 get_position='[longitude, latitude]',
+                 get_color='[66, 185, 245, 160]',
+                 get_radius=200,
+             ),
+         ],
+     ))
+    st.caption('Scroll to zoom in/out')
+
+    st.write(" ")
+    def bubleplot(df):
+       plot=st.vega_lite_chart(df, {
+             "width": 800,
+            "height": 750,
+
+           "layer": [
+            {
+               'mark': {'type': 'circle', 'tooltip': True,"opacity": 0.6,"stroke": "lightblue","strokeWidth": 0.5},"encoding":{'color': {'field': 'sch_rating', 'type': 'quantitative'},'size': {'field': 'sch_rating', 'type': 'quantitative',"scale": {"rangeMax": 250}}}},
+             {
+                'mark': {'type': 'circle',"opacity": 0.3,"stroke": "#959595","strokeWidth": 0.5,'color':'#959595'},"encoding":{'y': {'field': 'latitude', 'type': 'quantitative',"scale": {"domain": [33.31, 34.99]}},
+                'x': {'field': 'longitude', 'type': 'quantitative',"scale": {"domain": [-118.99, -117.395]}},
+                'latitude': {'field': 'latitude', 'type': 'quantitative'},
+                'longitude': {'field': 'longitude', 'type': 'quantitative'}},'color':'#959595'
+             },
+
+               {
+                 "mark": {'type':"text","fontSize":4,'tooltip': True},"encoding":{"text": {"field": "sch_StdPerTchr", "type": "nominal"}}  
+               }],
+            'encoding': {
+                'y': {'field': 'latitude', 'type': 'quantitative',"scale": {"domain": [33.31, 34.99]}},
+                'x': {'field': 'longitude', 'type': 'quantitative',"scale": {"domain": [-118.99, -117.395]}},
+                'latitude': {'field': 'latitude', 'type': 'quantitative'},
+                'longitude': {'field': 'longitude', 'type': 'quantitative'},
+
+
+
+            }
+
+        })
+       return plot
+
+    def bubleplot2(df):
+       plot=st.vega_lite_chart(df, {
+             "width": 800,
+            "height": 750,
+
+
+
+               'mark': {'type': 'circle', 'tooltip': True,"opacity": 0.6,"stroke": "lightblue","strokeWidth": 0.5},"encoding":{'size': {'field': 'sch_rating', 'type': 'quantitative',"scale": {"rangeMax": 450}}},
+
+
+            'encoding': {
+                'y': {'field': 'latitude', 'type': 'quantitative',"scale": {"domain": [33.31, 34.99]}},
+                'x': {'field': 'longitude', 'type': 'quantitative',"scale": {"domain": [-118.99, -117.395]}},
+                'latitude': {'field': 'latitude', 'type': 'quantitative'},
+                'longitude': {'field': 'longitude', 'type': 'quantitative'},
+                'color': {'field': 'sch_rating', 'type': 'quantitative'},
+
+
+            }
+
+        })
+       return plot  
+    st.subheader('Search Schools')
+    sch_type_list = df["sch_type"].unique()
+    sch_type = st.multiselect(
+        "Which kind of school types would you like to see?",
+        sch_type_list
+    )
+
+    sch_grade_list = df["sch_grade"].unique()
+    sch_grade = st.multiselect(
+        "Which grade would you like to know?",
+        sch_grade_list
+    )
+    Hide= st.checkbox('Want to hide no rating school?')
+    if Hide:
+       st.write("hidhing no rating shcool")
+       if not sch_type:
+          if not sch_grade:
+            st.map(df) 
+          else:
+             part_df=df.loc[df["sch_grade"].isin(sch_grade)]
+             bubleplot2(part_df)
+       elif not sch_grade: 
+          if not sch_type:
+            st.map(df)
+          else:
+              part_df=df.loc[df["sch_type"].isin(sch_type)]
+              bubleplot2(part_df)     
+       else:
+          part_df=df.loc[(df["sch_type"].isin(sch_type)&(df['sch_grade'].isin(sch_grade)))]     
+          bubleplot2(part_df)
+
+       if not sch_type+sch_grade:
+             st.write(f"showing all {len(df)} schools")
+       else:
+             hide_df=pd.DataFrame()
+             hide_df=hide_df.append(part_df.loc[-df['sch_rating'].isna()])
+             if len(hide_df)>1:
+                st.write(f"There are {len(hide_df)} schools found based on your preference")
+             elif len(hide_df)==1:
+                st.write(f"There is only {len(hide_df)} school found based on your preference")
+             else:
+                st.write(f"No result")
+    else: 
+       if not sch_type:
+          if not sch_grade:
+            st.map(df) 
+          else:
+             part_df=df.loc[df["sch_grade"].isin(sch_grade)]
+             bubleplot(part_df)
+       elif not sch_grade: 
+          if not sch_type:
+            st.map(df)
+          else:
+              part_df=df.loc[df["sch_type"].isin(sch_type)]
+              bubleplot(part_df)     
+       else:
+          part_df=df.loc[(df["sch_type"].isin(sch_type)&(df['sch_grade'].isin(sch_grade)))]     
+          bubleplot(part_df)
+
+       if not sch_type+sch_grade:
+             st.write(f"showing all {len(df)} schools")
+       else:
+             if len(part_df)>1:
+                st.write(f"There are {len(part_df)} schools found based on your preference")
+             elif len(part_df)==1:
+                st.write(f"There is only {len(part_df)} school found based on your preference")
+             else:
+                st.write(f"No result")
+
+    with st.expander("Show School detials"):
+       try:
+          st.write(hide_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
+       except:  
+          try:
+             st.write(part_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
+          except:
+             st.write(df)
+
+
+    st.subheader('Find Schools in your area')
+    number = st.text_input('Insert a Zip Code')
+
+    if number:
+       zipcode_df=df.loc[df["zip_code"]==int(number)]
+       st.dataframe(zipcode_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_type','sch_grade','sch_add']])
+       sch_type_count=pd.DataFrame(zipcode_df.groupby(['sch_type']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_type']).count().T.columns.tolist())
+       sch_grade_count=pd.DataFrame(zipcode_df.groupby(['sch_grade']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_grade']).count().T.columns.tolist())
+       st.bar_chart(sch_type_count)
+       st.bar_chart(sch_grade_count)
+       st.map(zipcode_df)
+
 
         
 #driver code
