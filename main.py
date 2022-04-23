@@ -34,7 +34,7 @@ def main():
     if page == "Education in LA":
         education()
     #Equity and opportunity
-    if page == "Equity and Opportunity":
+    if page == "Equity, Opportunity and Risk":
         equity()
 
 def homepage():
@@ -53,7 +53,7 @@ def crime():
     st.title('Crime in LA')
     DATE_COLUMN = 'date/time'
     DATA_URL = 'df_crime_last.csv.gz'
-    
+    @st.cache
     def load_data():
         data = pd.read_csv(DATA_URL)
         lowercase = lambda x: str(x).lower()
@@ -428,7 +428,8 @@ def education():
        st.map(zipcode_df)
 
 def equity():
-    st.header('Crime,Food,School Map')
+    st.title("Equity, Opportunity and Risk")
+    st.header('Crime, Food, School Map')
 
     if not firebase_admin._apps:
           cred = credentials.Certificate("./ServiceAccountKey.json")
