@@ -52,8 +52,8 @@ def homepage():
 def crime():
     st.title('Crime in LA')
     DATE_COLUMN = 'date/time'
-    DATA_URL = 'df_crime_last.csv.gz'
-    #@st.cache
+    DATA_URL = 'df_crime.csv.gz'
+    @st.cache
     def load_data():
         data = pd.read_csv(DATA_URL)
         lowercase = lambda x: str(x).lower()
@@ -234,7 +234,7 @@ def education():
     #https://sspai.com/post/58474
 
 
-    #   #@st.cache@st.cache
+    
     def load_data():
 
         edu_url='https://laequityeducation-default-rtdb.firebaseio.com/school.json'
@@ -442,7 +442,7 @@ def equity():
     Grocery_DF = pd.DataFrame()
     for doc in docs2:
           Grocery_DF = Grocery_DF.append(doc.to_dict(), ignore_index=True)
-    #@st.cache
+    
     def load_data1():
           DATA_URL = 'df_crime_last.csv.gz'
           DATE_COLUMN = 'date/time'
