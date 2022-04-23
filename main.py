@@ -209,7 +209,7 @@ def food():
             checkbox(data, data2)
             st.subheader(f'Map of food banks')
             maps(data)
-            st.subheader(f'Map of grocery stores')
+            st.subheader(f'Map of discount grocery stores')
             maps(data2)
 
         elif int(number) in listo:
@@ -218,7 +218,7 @@ def food():
             checkbox(data, data2)
             st.subheader(f'Map of food banks')
             maps(data)
-            st.subheader(f'Map of grocery stores')
+            st.subheader(f'Map of discount grocery stores')
             maps(data2)
 
         else:
