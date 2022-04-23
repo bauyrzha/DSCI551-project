@@ -227,7 +227,7 @@ def food():
         st.write('Enter please 5 main digits of ZipCode')
         
     st.write('In addition to food banks and grocery stores, essential food can be obtained by applying for Cal Fresh benefits:')
-    st.write('Cal Fresh benefits application [link](https://www.cdss.ca.gov/food-nutrition/calfresh)')
+    st.write('[Cal Fresh Benefits Application and Information](https://www.cdss.ca.gov/food-nutrition/calfresh)')
     
     try:
         image = Image.open('food.jpg')
