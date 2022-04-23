@@ -60,14 +60,16 @@ Step 2 (show data):
 
 Step 3 (data analysis):
 
-1) According to the histogram, we can notice that the pick of crime rates is at 12:00 pm. However, we guess that it is a default time when time of crime is unknown.
-Therefore, we consider the majority number of crimes takes place in evening time with the peak at 6 pm.
-2) According to the plot, many crimes take place in range of zipcodes 90000-90080.
-3) The most dangerous region is locations with zipcodes 90003, 90037, 90028 with 14479, 12551, 11145 crimes respectively from 2020 to present. 
-4) The safest region is locations with zipcodes 90245, 91506, 90802 with only 2, 3, 3 crimes respectively from 2020 to present. 
-5) Top crime types are stealing vehicles, simple assault of batteries, burglary from vehicles and vandalism.  
+1) According to the histogram, we can notice that the pick of crime rates is at 12:00 pm. However, we guess that it is a default time when the time of the crime is unknown.
+Therefore, we consider the majority number of crimes take place in the evening time with the peak at 6 pm.
+2) According to the plot, many crimes take place in a range of zipcodes 90000-90080.
+3) The most dangerous regions are locations with zipcodes 90003, 90037, 90028 with 14479, 12551, and 11145 crimes respectively from 2020 to the present. 
+4) The safest regions are locations with zipcodes 90245, 91506, and 90802 with only 2, 3, and 3 crimes respectively from 2020 to the present. 
+5) Top crime types are stealing vehicles, simple assault of batteries, burglary from vehicles, and vandalism. 
+
+_More detailed results of the analysis can be found in final_report.pdf_
   
-# 3.Food Access
+# 3. Food Access
 -------
 
 -------
