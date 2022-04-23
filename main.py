@@ -230,7 +230,7 @@ def education():
     #https://sspai.com/post/58474
 
 
-
+    @st.cache
     def load_data():
 
         edu_url='https://laequityeducation-default-rtdb.firebaseio.com/school.json'
