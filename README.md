@@ -69,5 +69,6 @@ Therefore, we consider the majority number of crimes takes place in evening time
 ------
 
 ------
-**Description of files**
+**Description of files:**
+
 To find out the whole usage, check out final_report.pdf.
