@@ -7,6 +7,7 @@ The group project created by Yerke Bauyrzhanov, Soumeya Kerrar, Zihao Han
 https://share.streamlit.io/bauyrzha/dsci551-project/main/main.py
 
 **Project title:** Social Inequality Across Los Angeles County
+
 **Topic:** This project will examine inequalities in regions of Los Angeles based on crime rates, access to food, and access to quality education.
 
 **Motivation:**
