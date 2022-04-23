@@ -53,7 +53,7 @@ def crime():
     st.title('Crime in LA')
     DATE_COLUMN = 'date/time'
     DATA_URL = 'df_crime.csv.gz'
-    @st.cache
+    
     def load_data():
         data = pd.read_csv(DATA_URL)
         lowercase = lambda x: str(x).lower()
