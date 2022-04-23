@@ -547,6 +547,7 @@ def equity():
     st.caption('Blue Spot shows Groceries')
     
 def resources():
+    st.write('Additional Resources')
         
 #driver code
 if __name__ == "__main__":
