@@ -1,3 +1,4 @@
 streamlit
 firebase_admin
 matplotlib
+pydeck
