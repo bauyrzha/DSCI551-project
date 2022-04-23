@@ -159,6 +159,10 @@ def food():
     FOOD_DF = pd.DataFrame()
     for doc in docs:
         FOOD_DF = FOOD_DF.append(doc.to_dict(), ignore_index=True) 
+    docs2 = db.collection(u'grocery_LA').stream()
+    Grocery_DF = pd.DataFrame()
+    for doc in docs2:
+        Grocery_DF = Grocery_DF.append(doc.to_dict(), ignore_index=True)
     
     def load_data():
         data = FOOD_DF[['Food Bank Name', 'Address', 'Zip Code', 'Latitude', 'Longitude']]
@@ -168,10 +172,18 @@ def food():
         data.rename(columns={'zip code': 'zipcode'}, inplace=True)
         return data
     
-    def checkbox(data):
+    def load_data2():
+        data = Grocery_DF[['Grocery Name','Address','zipcode','latitude','longitude']]
+        data[['zipcode','latitude','longitude']] = data[['zipcode','latitude','longitude']].apply(pd.to_numeric)
+        lowercase = lambda x: str(x).lower()
+        data.rename(lowercase, axis='columns', inplace=True)
+        return data
+    
+    def checkbox(data, data2):
         if st.checkbox('Show raw data'):
             st.subheader('Raw data')
             st.write(data)
+            st.write(data2)
             
     def maps(data):
         st.subheader(f'Map of all foodbanks')
@@ -180,6 +192,7 @@ def food():
     data_load_state = st.text('Loading data...')
     # Load all rows of data into the dataframe.
     data = load_data()
+    data2 = load_data2()
     # Notify the reader that the data was successfully loaded.
     data_load_state.text("Done! (using cache)")
     number = st.text_input('Insert a number of ZipCode or type/check "ALL" to see all crimes in LA county')
@@ -187,13 +200,15 @@ def food():
     try:
         listo = data['zipcode'].to_list()
         if number == 'ALL' or number == '"ALL"' or number == 'all' or number == '"all"' or st.checkbox('ALL'):
-            checkbox(data)
+            checkbox(data, data2)
             maps(data)
+            maps(data2)
 
         elif int(number) in listo:
             data=data[data['zipcode'] == int(number)]
-            checkbox(data)
+            checkbox(data, data2)
             maps(data)
+            maps(data2)
 
         else:
             st.write('Inserted number of ZipCode is not found')
