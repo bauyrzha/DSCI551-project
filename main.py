@@ -443,7 +443,7 @@ def equity():
       Grocery_DF = pd.DataFrame()
       for doc in docs2:
             Grocery_DF = Grocery_DF.append(doc.to_dict(), ignore_index=True)
-      #@st.cache
+      
       def load_data1():
             DATA_URL = 'df_crime_last.csv.gz'
             DATE_COLUMN = 'date/time'
