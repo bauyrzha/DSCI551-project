@@ -565,14 +565,20 @@ def resources():
     st.write('**_Education Initiatives_**')
     image3 = Image.open('education.jpg')
     st.image(image3)
+    st.write('[Los Angeles Education Partnership](https://www.laep.org/)')
+    st.write('[Los Angeles Mayor Education Initiatives](https://www.lamayor.org/education)')
     
-    st.write('**_Healthcare_**')
+    st.write('**_Healthcare Initiatives_**')
     image4 = Image.open('healthcare.jpg')
     st.image(image4)
+    st.write('[Los Angeles County of Public Health Initiatives](http://www.publichealth.lacounty.gov/arra.htm)')
+    st.write('[Los Angeles Care Health Plan](http://www.lacare.org/sites/default/files/L_A_%20Care%20Fact%20Sheet%205_15_14.pdf)')
     
-    st.write('**_Housing_**')
+    st.write('**_Housing Initiatives_**')
     image5 = Image.open('housing.jpg')
     st.image(image5)
+    st.write('[Los Angeles County Department of Regional Planning Housing Initiatives](https://planning.lacounty.gov/housing/initiatives)')
+    st.write('[Housing Authority of the City of Los Angeles Homeless Initiatives](https://www.hacla.org/en/about-section-8/homeless-initiatives)')
     
 #driver code
 if __name__ == "__main__":
