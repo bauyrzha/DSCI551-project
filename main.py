@@ -44,7 +44,7 @@ def main():
 def homepage():
     st.write("""
         # Social Inequality Across LA County
-        #### ***Topic:*** This project examines inequalities in regions of Los Angeles County based on crime rates, access to food, and access to quality education. 
+        #### This project examines inequalities in regions of Los Angeles County based on crime rates, access to food, and access to quality education. 
         ###### This app was created by _**Yerkebulan B., Zihao H., and Soumeya K.**_
         #""")
     try:
@@ -77,7 +77,7 @@ def crime():
         # use count() and sort()
         data1 = data.groupby(['zipcode'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
         # in context of zipcode            
-        st.subheader('Number of crimes in context of zipcodes')        
+        st.subheader('Number of crimes per zipcode')        
         fig = plt.figure(figsize=(9, 6))
         plt.bar(data1['zipcode'], data1['Count'])
         plt.xlabel("ZipCode")
@@ -91,8 +91,8 @@ def crime():
     def top10_zip(data):
         # use count() and sort()
         data1 = data.groupby(['zipcode'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
-        if st.checkbox('Show top 10 crimest zipcodes'):
-            st.subheader('Top 10 crimest zipcodes')
+        if st.checkbox('Show top 10 highest crime zipcodes'):
+            st.subheader('Top 10 highest crime zipcodes')
             st.write(data1.head(10))
     def top10_less_zip(data):
         # use count() and sort()
@@ -113,7 +113,7 @@ def crime():
             st.subheader('Top 10 rare crimes')
             st.write(data2.head(10))
     def victim_sex(data):
-        if st.checkbox('Show number of crimes in context of victim sex'):
+        if st.checkbox('Show number of crimes by victim sex'):
             # victim sex
             data3 = data[data['vict sex'] != 'H']
             data3 = data3.groupby(['vict sex'])['dr_no'].count().reset_index(name='Count').sort_values(['Count'], ascending=False)
@@ -191,9 +191,9 @@ def food():
     def checkbox(data, data2):
         if st.checkbox('Show raw data'):
             st.subheader('Raw data')
-            st.write('Foodbank information')
+            st.write('Food bank information')
             st.write(data)
-            st.write('Grocery iformation')
+            st.write('Grocery information')
             st.write(data2)
             
     def maps(data):
