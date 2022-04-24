@@ -15,7 +15,7 @@ def main():
         [
             "Homepage",
             "Crime in LA",
-            "Food Banks in LA",
+            "Food in LA",
             "Education in LA",
             "Equity, Opportunity and Risk",
             "Additional Resources"
@@ -54,7 +54,7 @@ def homepage():
         st.write('')
 
 def crime():
-    st.title('Crime in LA')
+    st.title('Crime in Los Angeles County')
     DATE_COLUMN = 'date/time'
     DATA_URL = 'df_crime_last.csv.gz'
     @st.cache
@@ -159,7 +159,7 @@ def crime():
         st.write('Please enter 5 main digits of ZipCode')
     
 def food():
-    st.title('Food Banks in Los Angeles County')
+    st.title('Food in Los Angeles County')
     if not firebase_admin._apps:
         cred = credentials.Certificate(st.secrets)
         app = firebase_admin.initialize_app(cred)
