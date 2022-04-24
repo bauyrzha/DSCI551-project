@@ -549,17 +549,31 @@ def equity():
 def resources():
     st.title('Additional Resources')
     st.write('_**A number of initiatives are listed below that aim to improve social equality across Los Angeles county to address issues such as public safety, food security, education equity, housing and healthcare.**_')
-    st.write('Public Safety and Crime Related Initiatives')
+    st.write('**_Public Safety and Crime Related Initiatives_**')
     image = Image.open('publicsafety.jpg')
     st.image(image)
     st.write('[LA DOT Safety Programs](https://ladot.lacity.org/projects/safety-programs)')   
     st.write('[LAPD Crime and Initiatives](https://lapdonlinestrgeacc.blob.core.usgovcloudapi.net/lapdonlinemedia/2022/01/2021_crime_initiatives.pdf)')
-    st.write('Food Initiatives')
-    st.write('Education Initiatives')
-    st.title('Related Social Inequalities')
-    st.write('Healthcare')
-    st.write('Housing')
-        
+    
+    st.write('**_Food Initiatives_**')
+    image2 = Image.open('foodsecurity.jpg')
+    st.image(image2)    
+    st.write('[Los Angeles Regional Food Bank](https://www.lafoodbank.org/about/hunger-in-l-a/)')
+    st.write('[County of Los Angeles Public Health Food Insecurity Study](http://ph.lacounty.gov/nut/media/nutrition-physical-activity-resources/LA_County_Food_Insecurity_Report_2021_508Compliant.pdf)')
+    st.write('[USC Public Exchange Enough to Eat Study](https://publicexchange.usc.edu/wp-content/uploads/2021/10/Enough-to-Eat.pdf)')
+    
+    st.write('**_Education Initiatives_**')
+    image3 = Image.open('education.jpg')
+    st.image(image3)
+    
+    st.write('**_Healthcare_**')
+    image4 = Image.open('healthcare.jpg')
+    st.image(image4)
+    
+    st.write('**_Housing_**')
+    image5 = Image.open('housing.jpg')
+    st.image(image5)
+    
 #driver code
 if __name__ == "__main__":
     main()
