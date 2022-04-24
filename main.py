@@ -548,14 +548,14 @@ def equity():
     
 def resources():
     st.title('Additional Resources')
-    st.write('Public Safety Initiatives')
+    st.write('_**A number of initiatives are listed below that aim to improve social equality across Los Angeles county to address issues such as public safety, food security, education equity, housing and healthcare.**_')
+    st.write('Public Safety and Crime Related Initiatives')
     image = Image.open('publicsafety.jpg')
     st.image(image)
-    st.write('Crime related safety initiatives')
-    st.write('[Other public safety initiatives](https://ladot.lacity.org/projects/safety-programs)')
+    st.write('[LA DOT Safety Programs](https://ladot.lacity.org/projects/safety-programs)')   
+    st.write('[LAPD Crime and Initiatives](https://lapdonlinestrgeacc.blob.core.usgovcloudapi.net/lapdonlinemedia/2022/01/2021_crime_initiatives.pdf)')
     st.write('Food Initiatives')
     st.write('Education Initiatives')
-    
     st.title('Related Social Inequalities')
     st.write('Healthcare')
     st.write('Housing')
