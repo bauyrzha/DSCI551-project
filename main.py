@@ -45,11 +45,11 @@ def homepage():
     st.write("""
         # Social Inequality Across LA County
         #### ***Topic:*** This project examines inequalities in regions of Los Angeles County based on crime rates, access to food, and access to quality education. 
-        ###### The app was created by _**Yerkebulan B., Soumeya K., Zihao H.**_
+        ###### This app was created by _**Yerkebulan B., Zihao H., and Soumeya K.**_
         #""")
     try:
         image = Image.open('homepage.jpg')
-        st.image(image, caption='Original Map of Los Angeles Country')
+        st.image(image, caption='Original Map of Los Angeles County')
     except:
         st.write('')
 
