@@ -547,7 +547,16 @@ def equity():
     st.caption('Blue Spot shows Groceries')
     
 def resources():
-    st.write('Additional Resources')
+    st.title('Additional Resources')
+    st.write('Public Safety Initiatives')
+    st.write('Crime related safety initiatives')
+    st.write('[Other public safety initiatives](https://ladot.lacity.org/projects/safety-programs)')
+    st.write('Food Initiatives')
+    st.write('Education Initiatives')
+    
+    st.title('Related Social Inequalities')
+    st.write('Healthcare')
+    st.write('Housing')
         
 #driver code
 if __name__ == "__main__":
