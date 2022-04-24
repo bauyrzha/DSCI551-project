@@ -29,7 +29,7 @@ def main():
     if page == "Crime in LA":
         crime()
     #Food LA Page
-    if page == "Food Banks in LA":
+    if page == "Food in LA":
         food()
     #Education LA Page
     if page == "Education in LA":
