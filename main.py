@@ -550,7 +550,7 @@ def resources():
     st.title('Additional Resources')
     st.write('Public Safety Initiatives')
     image = Image.open('publicsafety.jpg')
-    st.image(Image)
+    st.image(image)
     st.write('Crime related safety initiatives')
     st.write('[Other public safety initiatives](https://ladot.lacity.org/projects/safety-programs)')
     st.write('Food Initiatives')
