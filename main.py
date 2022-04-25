@@ -426,7 +426,7 @@ def education():
           try:
              st.write(part_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
           except:
-             st.write(df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
+             st.write(df.loc[:,['sch_name','sch_add','sch_type','sch_grade']])
 
 
     st.subheader('Find Schools in your area')
