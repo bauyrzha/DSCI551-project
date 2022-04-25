@@ -462,8 +462,9 @@ def equity():
     st.title("Equity, Opportunity and Risk")
     
     data_load_state = st.text('Rendering Plot...')
+    key_fs = json.loads(st.secrets["textkey"])
     if not firebase_admin._apps:
-        cred = credentials.Certificate(st.secrets["textkey"])
+        cred = credentials.Certificate(key_fs)
         app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
