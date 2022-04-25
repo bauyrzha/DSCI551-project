@@ -335,7 +335,7 @@ def education():
 
 
 
-               'mark': {'type': 'circle', 'tooltip': True,"opacity": 0.6,"stroke": "lightblue","strokeWidth": 0.5},"encoding":{'size': {'field': 'sch_rating', 'type': 'quantitative',"scale": {"rangeMax": 450}}},
+               'mark': {'type': 'circle', 'tooltip': True,"opacity": 0.6,"stroke": "lightblue","strokeWidth": 0.5},"encoding":{},
 
 
             'encoding': {
@@ -344,6 +344,7 @@ def education():
                 'latitude': {'field': 'latitude', 'type': 'quantitative'},
                 'longitude': {'field': 'longitude', 'type': 'quantitative'},
                 'color': {'field': 'sch_rating', 'type': 'quantitative'},
+                'size': {'field': 'sch_rating', 'type': 'quantitative',"scale": {"rangeMax": 450}}
 
 
             }
