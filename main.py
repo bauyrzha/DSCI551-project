@@ -461,8 +461,8 @@ def equity():
     
     data_load_state = st.text('Rendering Plot...')
     if not firebase_admin._apps:
-          cred = credentials.Certificate(st.secrets)
-          app = firebase_admin.initialize_app(cred)
+        cred = credentials.Certificate(st.secrets)
+        app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
     FOOD_DF = pd.DataFrame()
