@@ -450,8 +450,8 @@ def education():
 
 def equity():
     st.title("Equity, Opportunity and Risk")
-    st.header('Crime, Food, School Map')
-
+    
+    data_load_state = st.text('Rendering Plot...')
     if not firebase_admin._apps:
           cred = credentials.Certificate("./ServiceAccountKey.json")
           app = firebase_admin.initialize_app(cred)
@@ -506,7 +506,8 @@ def equity():
     loc_df3=pd.DataFrame([df3["longitude"],df3["latitude"]]).T
     loc_df2=pd.DataFrame([df2["longitude"],df2["latitude"]]).T
     loc_df1=pd.DataFrame([df1["longitude"],df1["latitude"]]).T
-    data_load_state = st.text('Rendering Plot...')
+    st.header('Crime, Food, School Map')
+    data_load_state.text("Done! (using cache)")
     st.pydeck_chart(pdk.Deck(
        map_style='mapbox://styles/mapbox/light-v9',
        initial_view_state=pdk.ViewState(
