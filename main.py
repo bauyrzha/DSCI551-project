@@ -461,7 +461,7 @@ def equity():
     
     data_load_state = st.text('Rendering Plot...')
     if not firebase_admin._apps:
-          cred = credentials.Certificate("./ServiceAccountKey.json")
+          cred = credentials.Certificate(st.secrets)
           app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
@@ -472,10 +472,10 @@ def equity():
     Grocery_DF = pd.DataFrame()
     for doc in docs2:
           Grocery_DF = Grocery_DF.append(doc.to_dict(), ignore_index=True)
+    DATA_URL = 'df_crime_last.csv.gz'
+    DATE_COLUMN = 'date/time'
     @st.cache
     def load_data1():
-          DATA_URL = 'df_crime_last.csv.gz'
-          DATE_COLUMN = 'date/time'
           data = pd.read_csv(DATA_URL)
           lowercase = lambda x: str(x).lower()
           data.rename(lowercase, axis='columns', inplace=True)
