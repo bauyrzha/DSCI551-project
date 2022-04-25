@@ -453,7 +453,7 @@ def education():
     except:
        st.caption("Please enter the zip code")
        st.caption('Count by district')
-       sch_dist_df=pd.DataFrame(df.groupby(['sch_dist']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=df.groupby(['sch_dist']).count().T.columns.tolist())
+       sch_dist_df=pd.DataFrame(df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.iloc[0,:].values.tolist(),columns=["count"],index=df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.columns.tolist())
           
        st.bar_chart(sch_dist_df)
 def equity():
