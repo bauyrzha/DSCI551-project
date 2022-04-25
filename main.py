@@ -7,6 +7,7 @@ from PIL import Image
 import firebase_admin
 from firebase_admin import credentials, firestore
 import pydeck as pdk
+import json
 
 #Setting up our homepage window of Streamlit app
 def main():
@@ -160,8 +161,9 @@ def crime():
     
 def food():
     st.title('Food in Los Angeles County')
+    key_fs = json.loads(st.secrets["textkey"])
     if not firebase_admin._apps:
-        cred = credentials.Certificate(st.secrets["textkey"].to_json())
+        cred = credentials.Certificate(key_fs)
         app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
