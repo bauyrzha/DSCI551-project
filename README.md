@@ -48,7 +48,7 @@ to see which areas are most negatively impacted, and also filter by categories o
 
 Variables we have:
 
-**dr_no** - Division of Records Number: Official file number\n
+**dr_no** - Division of Records Number: Official file number \n
 **date/time** - date and time crimes occur\n
 **crm cd desc** - definition of crime\n
 **vict age** - victim age\n
