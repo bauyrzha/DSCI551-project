@@ -432,22 +432,24 @@ def education():
     st.subheader('Find Schools in your area')
     number = st.text_input('Insert a Zip Code')
     ziplist=df["zip_code"].values.tolist()
-    if int(number) in ziplist:
-       zipcode_df=df.loc[df["zip_code"]==int(number)]
-       st.caption(f'schools in {number} area')
-       st.dataframe(zipcode_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_type','sch_grade','sch_add']])
-       
-       sch_type_count=pd.DataFrame(zipcode_df.groupby(['sch_type']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_type']).count().T.columns.tolist())
-       sch_grade_count=pd.DataFrame(zipcode_df.groupby(['sch_grade']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_grade']).count().T.columns.tolist())
-       st.caption('Count by type')   
-       st.bar_chart(sch_type_count)
-       st.caption('Count by grade')
-       st.bar_chart(sch_grade_count)
-       st.caption('Schools on map')
-       st.map(zipcode_df)
-    else:
-      st.caption(f'{number} area is too far form LA County')  
+    try:
+        if int(number) in ziplist:
+           zipcode_df=df.loc[df["zip_code"]==int(number)]
+           st.caption(f'schools in {number} area')
+           st.dataframe(zipcode_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_type','sch_grade','sch_add']])
 
+           sch_type_count=pd.DataFrame(zipcode_df.groupby(['sch_type']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_type']).count().T.columns.tolist())
+           sch_grade_count=pd.DataFrame(zipcode_df.groupby(['sch_grade']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_grade']).count().T.columns.tolist())
+           st.caption('Count by type')   
+           st.bar_chart(sch_type_count)
+           st.caption('Count by grade')
+           st.bar_chart(sch_grade_count)
+           st.caption('Schools on map')
+           st.map(zipcode_df)
+        else:
+          st.caption(f'{number} area is too far form LA County')  
+   except:
+       st.caption("Please enter the zip code") 
 def equity():
     st.title("Equity, Opportunity and Risk")
     
