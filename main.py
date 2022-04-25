@@ -448,9 +448,14 @@ def education():
            st.caption('Schools on map')
            st.map(zipcode_df)
         else:
-          st.caption(f'{number} area is too far form LA County')  
+          
+          st.caption(f'{number} area is too far form LA County') 
     except:
-       st.caption("Please enter the zip code") 
+       st.caption("Please enter the zip code")
+       st.caption('Count by district')
+       sch_dist_df=pd.DataFrame(df.groupby(['sch_dist']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=df.groupby(['sch_dist']).count().T.columns.tolist())
+          
+       st.bar_chart(sch_dist_df)
 def equity():
     st.title("Equity, Opportunity and Risk")
     
