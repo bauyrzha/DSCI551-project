@@ -46,31 +46,19 @@ to see which areas are most negatively impacted, and also filter by categories o
 - Types of crimes(ranked more common and less common)
 - Victim Sex
 
-Step 1 (data extracting and data cleaning):
+Variables we have:
 
-1) download dataset and clean/remove unnecessary/irrelevant data.
-  run jupyter notebook **crime_cleaning.ipynb**
-2) get zipcodes for locations of crimes. Need to use google colab.
-  run jupyter notebook **get_zip_google_colab.ipynb** on google colab.
-  
-Step 2 (show data):
+**dr_no** - Division of Records Number: Official file number.
+**date/time** - date and time crimes occur.
+**crm cd desc** - definition of crime
+**vict age** - victim age
+**vict sex**  - victim sex (F - Female M - Male X - Unknown)
+**location** - address where crimes occur
+**lat** - latitude
+**lon** - longitude
+**zipcode** - zipcode
 
-1) create python code using stremlit library to create stremlit application.
-2) create requirements.txt with the list of necessary libraries.
-   run command line **streamlit run main.py** for local machine
-
-Step 3 (data analysis):
-
-1) According to the histogram, we can notice that the peak of crime rates is at 12:00 pm. However, we guess that it is a default time when the time of the crime is unknown.
-Therefore, we consider the majority number of crimes take place in the evening time with the peak at 6 pm.
-2) According to the plot, many crimes take place in a range of zipcodes 90000-90080.
-3) The most dangerous regions are locations with zipcodes 90003, 90037, 90028 with 14479, 12551, and 11145 crimes respectively from 2020 to the present. 
-4) The safest regions are locations with zipcodes 90245, 91506, and 90802 with only 2, 3, and 3 crimes respectively from 2020 to the present. 
-5) Top crime types are stealing vehicles, simple assault of batteries, burglary from vehicles, and vandalism. 
-6) According to the categorical plot, crimes against male occur more often than against female
-
-_More detailed results of the analysis can be found in final_report.pdf_
-  
+ 
 # 3. Food Access
 -------
 
@@ -79,6 +67,3 @@ _More detailed results of the analysis can be found in final_report.pdf_
 ------
 
 ------
-**Description of files:**
-
-To find out the whole usage, check out final_report.pdf.
