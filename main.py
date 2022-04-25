@@ -434,11 +434,16 @@ def education():
 
     if number:
        zipcode_df=df.loc[df["zip_code"]==int(number)]
+       st.caption(f'schools in {number} area')
        st.dataframe(zipcode_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_type','sch_grade','sch_add']])
+       
        sch_type_count=pd.DataFrame(zipcode_df.groupby(['sch_type']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_type']).count().T.columns.tolist())
        sch_grade_count=pd.DataFrame(zipcode_df.groupby(['sch_grade']).count().T.iloc[0,:].values.tolist(),columns=["count"],index=zipcode_df.groupby(['sch_grade']).count().T.columns.tolist())
+       st.caption('Count by type')   
        st.bar_chart(sch_type_count)
+       st.caption('Count by grade')
        st.bar_chart(sch_grade_count)
+       st.caption('Schools on map')
        st.map(zipcode_df)
 
 def equity():
