@@ -452,7 +452,7 @@ def education():
           st.caption(f'{number} area is too far form LA County') 
     except:
        st.caption("Please enter the zip code")
-       st.caption('Count by district')
+       st.caption('Districts have more than 50 schools')
        sch_dist_df=pd.DataFrame(df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.iloc[0,:].values.tolist(),columns=["count"],index=df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.columns.tolist())
           
        st.bar_chart(sch_dist_df)
