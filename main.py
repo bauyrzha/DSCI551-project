@@ -431,8 +431,8 @@ def education():
 
     st.subheader('Find Schools in your area')
     number = st.text_input('Insert a Zip Code')
-
-    if number:
+    ziplist=df["zip_code"].values.tolist()
+    if int(number) in ziplist:
        zipcode_df=df.loc[df["zip_code"]==int(number)]
        st.caption(f'schools in {number} area')
        st.dataframe(zipcode_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_type','sch_grade','sch_add']])
@@ -504,6 +504,7 @@ def equity():
     loc_df3=pd.DataFrame([df3["longitude"],df3["latitude"]]).T
     loc_df2=pd.DataFrame([df2["longitude"],df2["latitude"]]).T
     loc_df1=pd.DataFrame([df1["longitude"],df1["latitude"]]).T
+    data_load_state = st.text('Rendering Plot...')
     st.pydeck_chart(pdk.Deck(
        map_style='mapbox://styles/mapbox/light-v9',
        initial_view_state=pdk.ViewState(
