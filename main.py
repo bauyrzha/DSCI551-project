@@ -532,7 +532,7 @@ def equity():
            pdk.Layer(
               "HeatmapLayer",
               data=loc_df1,
-              opacity=0.9,
+              opacity=0.6,
               get_position=["longitude", "latitude"],
            ),
            pdk.Layer(
