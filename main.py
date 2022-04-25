@@ -161,7 +161,7 @@ def crime():
 def food():
     st.title('Food in Los Angeles County')
     if not firebase_admin._apps:
-        cred = credentials.Certificate(st.secrets)
+        cred = credentials.Certificate(st.secrets["textkey"])
         app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
@@ -461,7 +461,7 @@ def equity():
     
     data_load_state = st.text('Rendering Plot...')
     if not firebase_admin._apps:
-        cred = credentials.Certificate(st.secrets)
+        cred = credentials.Certificate(st.secrets["textkey"])
         app = firebase_admin.initialize_app(cred)
     db = firestore.client()
     docs = db.collection(u'foodbanks_LA').stream()
