@@ -426,7 +426,7 @@ def education():
           try:
              st.write(part_df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
           except:
-             st.write(df)
+             st.write(df.loc[:,['sch_name','sch_rating','sch_StdPerTchr','sch_add']])
 
 
     st.subheader('Find Schools in your area')
@@ -509,7 +509,7 @@ def equity():
     loc_df2=pd.DataFrame([df2["longitude"],df2["latitude"]]).T
     loc_df1=pd.DataFrame([df1["longitude"],df1["latitude"]]).T
     st.header('Crime, Food, School Map')
-    data_load_state.text("Done! (using cache)")
+    
     st.pydeck_chart(pdk.Deck(
        map_style='mapbox://styles/mapbox/light-v9',
        initial_view_state=pdk.ViewState(
@@ -551,6 +551,7 @@ def equity():
            ),
        ],
    ))
+    data_load_state.text("Done!")
     st.caption('Scroll to zoom in/out')
     st.caption('Bar shows the density of the Schools')
     st.caption('Heatmap shows the density of the Crimes')
