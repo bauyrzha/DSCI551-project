@@ -448,7 +448,7 @@ def education():
            st.map(zipcode_df)
         else:
           st.caption(f'{number} area is too far form LA County')  
-   except:
+    except:
        st.caption("Please enter the zip code") 
 def equity():
     st.title("Equity, Opportunity and Risk")
