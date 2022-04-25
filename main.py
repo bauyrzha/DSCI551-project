@@ -445,6 +445,8 @@ def education():
        st.bar_chart(sch_grade_count)
        st.caption('Schools on map')
        st.map(zipcode_df)
+    else:
+      st.caption(f'{number} area is too far form LA County')  
 
 def equity():
     st.title("Equity, Opportunity and Risk")
