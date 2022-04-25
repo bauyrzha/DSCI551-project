@@ -455,7 +455,7 @@ def education():
        st.caption('Districts have more than 50 schools')
        sch_dist_df=pd.DataFrame(df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.iloc[0,:].values.tolist(),columns=["count"],index=df.groupby(['sch_dist']).count()[df.groupby(['sch_dist']).count()>=50].T.columns.tolist())
           
-       st.bar_chart(sch_dist_df,height=2000)
+       st.bar_chart(sch_dist_df,height=900)
 def equity():
     st.title("Equity, Opportunity and Risk")
     
