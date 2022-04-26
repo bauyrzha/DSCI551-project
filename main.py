@@ -70,7 +70,7 @@ def crime():
             st.subheader('Raw data')
             st.write(data)
     def hist(data):
-        st.subheader('Number of crimes by hour')
+        st.subheader('Number of crimes per hour')
         hist_values = np.histogram(
         data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
         st.bar_chart(hist_values)
@@ -266,7 +266,7 @@ def education():
        st.dataframe(df)
 
 
-    st.subheader('Education opportunity Density Map in Los Angeles County:')
+    st.subheader('Education Opportunity Density Map in Los Angeles County:')
     loc_df=pd.DataFrame([df["longitude"],df["latitude"]]).T
     st.pydeck_chart(pdk.Deck(
          map_style='mapbox://styles/mapbox/light-v9',
@@ -459,7 +459,7 @@ def education():
           
        st.bar_chart(sch_dist_df,height=900)
 def equity():
-    st.title("Equity, Opportunity and Risk")
+    st.title("Equity, Opportunity, and Risk")
     
     data_load_state = st.text('Rendering Plot...')
     key_fs = json.loads(st.secrets["textkey"])
@@ -517,7 +517,7 @@ def equity():
     loc_df3=pd.DataFrame([df3["longitude"],df3["latitude"]]).T
     loc_df2=pd.DataFrame([df2["longitude"],df2["latitude"]]).T
     loc_df1=pd.DataFrame([df1["longitude"],df1["latitude"]]).T
-    st.header('Crime, Food, School Map')
+    st.header('Map of Crime, Food, and Schools')
     
     st.pydeck_chart(pdk.Deck(
        map_style='mapbox://styles/mapbox/light-v9',
@@ -569,7 +569,7 @@ def equity():
     
 def resources():
     st.title('Additional Resources')
-    st.write('_**A number of initiatives are listed below that aim to improve social equality across Los Angeles county to address issues such as public safety, food security, education equity, housing and healthcare.**_')
+    st.write('_**A number of initiatives are listed below that aim to improve social equality across Los Angeles County. These seek to address issues such as public safety, food security, education equity, housing and healthcare.**_')
     st.write('**_Public Safety and Crime Related Initiatives_**')
     image = Image.open('publicsafety.jpg')
     st.image(image)
