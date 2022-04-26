@@ -68,10 +68,62 @@ Variables we have:
 
  
 # 3. Food Access
--------
+We used the foodpantries.org list of food banks as well as the Grocery Outlet Store Locator, as this is considered an affordable grocery option, to give a general idea of food resources across the county.
+Foodpantries.org: https://www.foodpantries.org/co/ca-los_angeles
+Grocery Outlet Store Locator: https://www.groceryoutlet.com/store-locator?store_location=&store_region=Los+Angeles
+ 
+Description: The foodpantries.org website offers a list of food banks in the county, while the Grocery Store outlet store locator website offers a list of Grocery Outlet locations in the county.
+ 
+Features included:
+Locations of food banks
+Locations of Grocery Outlet stores
 
--------
+Variables:
+Food Bank Name
+Food Bank Address
+Food Bank Zip Code
+Food Bank Latitude
+Food Bank Longitude
+Grocery Store Name
+Grocery Store Address
+Grocery Store Zip Code
+Grocery Store Latitude
+Grocery Store Longitude
+ 
+Data extracting and data cleaning:
+Data was obtained by scraping the foodpantries.org and Grocery Outlet websites.
+Addresses were converted to coordinates (latitude and longitude) using the geopy package in python
+ 
+Data storage:
+Extracted and cleaned food datasets are stored in Cloud Firestore. To connect with Firestore we generated a private key. Normally you should NEVER store a key in a public GitHub. Therefore, we used Secrets Management in Streamlit sharing to securely connect to private data sources. The sample python code of creating TOML secrets provided. (key-to-toml.py) 
+ 
 # 4. Education Equity
-------
-
-------
+Description: This data was obtained from https://www.greatschools.org/. All schools in LA County can be searched by their LA County zipcode. The number of schools can reflect the distribution and concentration of education around the county. Ratings reflect the evaluation of each school as well as the diversity and inclusiveness within the school. The teacher-student ratio can reflect the educational resources that each student can receive. Through these, we can understand the educational equality of the whole county.
+ 
+Features included:
+School distribution and density distribution
+Multi-tab search based on school type
+Multi-tab search based on school grade
+List multi-label search results
+Mouse suspension shows the proportion of teachers and students
+Search for schools by zip code
+Table of Postal Code Search Results
+Count by school type and grade
+ 
+Variables:
+sch_name: school name
+sch_add: school address
+zip_code: school zip code
+add_dist: school block
+sch_rating: school evaluation (based on test scores and school equality ratings)
+sch_StdPerTchr: school-teacher-student ratio
+sch_type: school type
+sch_garde: school grade
+longitude: longitude
+latitude: latitude
+ 
+Data extracting and data cleaning: 
+Obtain the required zipcode from the LA County Open Data website (https://data.lacounty.gov/GIS-Data/ZIP-Codes-and-Postal-Cities/c3xr-3jw2/data). Use the selenium package to scrape data from greatschool's dynamic web page, based on the zipcode obtained earlier. Use the geocoder package to access the Bing map service to obtain the latitude and longitude corresponding to the address. Clean up the data, check whether the newly acquired address matches the previous address, and correct the erroneous data. Insert missing data, according to the principle of proximity. 
+	
+Data storage:
+Data is stored locally and uploaded to firebase cloud database.
