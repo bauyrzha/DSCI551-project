@@ -128,12 +128,21 @@ Count by school type and grade
 **Variables:**
 
 **sch_name:** school name
+
 **sch_add:** school address
+
 **zip_code:** school zip code
+
 **add_dist:** school block
+
 **sch_rating:** school evaluation (based on test scores and school equality ratings)
+
 **sch_StdPerTchr:** school-teacher-student ratio
+
 **sch_type:** school type
+
 **sch_garde:** school grade
+
 **longitude:** longitude
+
 **latitude:** latitude
