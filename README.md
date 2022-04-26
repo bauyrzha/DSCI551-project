@@ -46,7 +46,7 @@ to see which areas are most negatively impacted, and also filter by categories o
 - Types of crimes(ranked more common and less common)
 - Victim Sex
 
-**Variables we have:**
+**Variables:**
 
 **dr_no** - Division of Records Number: Official file number
 
